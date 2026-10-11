@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Borrowing System</title>
+    <!-- Bootstrap CSS and Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f6f8;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .navbar { background: #244a73; }
+        .navbar-brand { font-weight: bold; }
+        .nav-link { margin-left: 8px; }
+        .nav-link i { margin-right: 4px; }
+      
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+      
+        h1, h4, h5 { color: #244a73; }
+
+        .section-icon {
+            margin-right: 6px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 6px;
+        }
+
+        .form-label i {
+            color: #244a73;
+            margin-right: 5px;
+        }
+
+        .btn-primary {
+            background: #244a73;
+            border-color: #244a73;
+        }
+
+        .btn-primary:hover {
+            background: #193753;
+        }
+
+        .table th {
+            background: #edf1f5;
+            white-space: nowrap;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+
+        .available { background: #e1f3e8; color: #216b40; }
+        .borrowed { background: #fff0d5; color: #875c00; }
+        .maintenance { background: #fbe5e5; color: #a52834; }
+        .returned { background: #e2edfc; color: #244a73; }
+
+        section { scroll-margin-top: 75px; }
+
+        footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#dashboard">
+            <i class="bi bi-box-seam"></i> School Borrowing System
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#dashboard">
+                        <i class="bi bi-house-door"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#equipment">
+                        <i class="bi bi-pc-display"></i> Equipment
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#borrow">
+                        <i class="bi bi-box-arrow-up-right"></i> Borrow Item
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#records">
+                        <i class="bi bi-journal-text"></i> Records
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#maintenance">
+                        <i class="bi bi-tools"></i> Maintenance
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-4">
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="mb-5">
+        <h1 class="h3 mb-2">
+            <i class="bi bi-speedometer2 section-icon"></i>Dashboard
+        </h1>
+        <p class="text-secondary mb-4">
+            Manage school equipment, borrowing, returns, and maintenance.
+        </p>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="mb-3">
+                    <i class="bi bi-clock-history section-icon"></i>
+                    Recent Borrowing Transactions
+                </h5>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Borrower</th>
+                                <th>Equipment</th>
+                                <th>Borrow Date</th>
+                                <th>Expected Return</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><i class="bi bi-person me-1"></i>Kinjay Dela Cruz</td>
+                                <td><i class="bi bi-projector me-1"></i>Epson Projector EB-X06</td>
+                                <td>Oct 1, 2026</td>
+                                <td>Oct 3, 2026</td>
+                                <td>
+                                    <span class="badge-status returned">
+                                        <i class="bi bi-check-circle"></i> Returned
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><i class="bi bi-person me-1"></i>Sarah Gomez</td>
+                                <td><i class="bi bi-mic me-1"></i>Wireless Microphone Set</td>
+                                <td>Oct 10, 2026</td>
+                                <td>Oct 12, 2026</td>
+                                <td>
+                                    <span class="badge-status borrowed">
+                                        <i class="bi bi-clock"></i> Active
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><i class="bi bi-person me-1"></i>Prof. Alan Turing</td>
+                                <td><i class="bi bi-display me-1"></i>Dell Monitor 24 inch</td>
+                                <td>Oct 11, 2026</td>
+                                <td>Oct 13, 2026</td>
+                                <td>
+                                    <span class="badge-status borrowed">
+                                        <i class="bi bi-clock"></i> Active
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Inventory -->
+    <section id="equipment" class="mb-5">
+        <h4 class="mb-2">
+            <i class="bi bi-pc-display-horizontal section-icon"></i>
+            Equipment Inventory
+        </h4>
+        <p class="text-secondary">Registered equipment and its current location.</p>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Property No.</th>
+                                <th>Equipment</th>
+                                <th>Category</th>
+                                <th>Room / Office</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PROP-AV-001</td>
+                                <td><i class="bi bi-projector me-1"></i>Epson Projector EB-X06</td>
+                                <td>Audio-Visual</td>
+                                <td>AVR Room 101</td>
+                                <td><span class="badge-status available"><i class="bi bi-check-circle"></i> Available</span></td>
+                            </tr>
+                            <tr>
+                                <td>PROP-IT-002</td>
+                                <td><i class="bi bi-display me-1"></i>Dell Monitor 24 inch</td>
+                                <td>IT Hardware</td>
+                                <td>Computer Lab 1</td>
+                                <td><span class="badge-status available"><i class="bi bi-check-circle"></i> Available</span></td>
+                            </tr>
+                            <tr>
+                                <td>PROP-LAB-003</td>
+                                <td><i class="bi bi-eye me-1"></i>Compound Microscope X100</td>
+                                <td>Laboratory</td>
+                                <td>Science Lab A</td>
+                                <td><span class="badge-status available"><i class="bi bi-check-circle"></i> Available</span></td>
+                            </tr>
+                            <tr>
+                                <td>PROP-AV-004</td>
+                                <td><i class="bi bi-mic me-1"></i>Wireless Microphone Set</td>
+                                <td>Audio-Visual</td>
+                                <td>AVR Room 101</td>
+                                <td><span class="badge-status borrowed"><i class="bi bi-arrow-left-right"></i> Borrowed</span></td>
+                            </tr>
+                            <tr>
+                                <td>PROP-OFF-005</td>
+                                <td><i class="bi bi-printer me-1"></i>HP LaserJet Printer</td>
+                                <td>Office Electronics</td>
+                                <td>Library Admin</td>
+                                <td><span class="badge-status maintenance"><i class="bi bi-tools"></i> Under Maintenance</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Borrow Equipment -->
+    <section id="borrow" class="mb-5">
+        <h4 class="mb-2">
+            <i class="bi bi-clipboard-check section-icon"></i>Borrow Equipment
+        </h4>
+        <p class="text-secondary">Enter the borrower's and equipment details.</p>
+
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <h5 class="mb-3">
+                        <i class="bi bi-person-vcard section-icon"></i>
+                        Borrower Information
+                    </h5>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="idNumber" class="form-label">
+                                <i class="bi bi-card-text"></i>Student / Employee ID
+                            </label>
+                            <input id="idNumber" class="form-control" type="text"
+                                placeholder="e.g. 2024-00001" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="fullName" class="form-label">
+                                <i class="bi bi-person"></i>Full Name
+                            </label>
+                            <input id="fullName" class="form-control" type="text"
+                                placeholder="Enter full name" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">
+                                <i class="bi bi-people"></i>Borrower Role
+                            </label>
+                            <select id="role" class="form-select" required>
+                                <option value="" selected disabled>Select role</option>
+                                <option>Student</option>
+                                <option>Faculty</option>
+                                <option>Staff</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="contact" class="form-label">
+                                <i class="bi bi-telephone"></i>Contact Number
+                            </label>
+                            <input id="contact" class="form-control" type="tel"
+                                placeholder="Enter contact number">
+                        </div>
+                    </div>
+
+                    <h5 class="mb-3">
+                        <i class="bi bi-box-seam section-icon"></i>
+                        Equipment Information
+                    </h5>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-8">
+                            <label for="equipmentItem" class="form-label">
+                                <i class="bi bi-pc-display"></i>Equipment Item
+                            </label>
+                            <select id="equipmentItem" class="form-select" required>
+                                <option value="" selected disabled>Select equipment</option>
+                                <option>PROP-AV-001 — Epson Projector EB-X06</option>
+                                <option>PROP-IT-002 — Dell Monitor 24 inch</option>
+                                <option>PROP-LAB-003 — Compound Microscope X100</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="condition" class="form-label">
+                                <i class="bi bi-clipboard-check"></i>Item Condition
+                            </label>
+                            <select id="condition" class="form-select" required>
+                                <option>Good</option>
+                                <option>Minor Damage</option>
+                                <option>Needs Inspection</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="borrowDate" class="form-label">
+                                <i class="bi bi-calendar-check"></i>Borrow Date
+                            </label>
+                            <input id="borrowDate" class="form-control"
+                                type="datetime-local" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="returnDate" class="form-label">
+                                <i class="bi bi-calendar-event"></i>Expected Return Date
+                            </label>
+                            <input id="returnDate" class="form-control"
+                                type="datetime-local" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="purpose" class="form-label">
+                                <i class="bi bi-chat-left-text"></i>Purpose of Borrowing
+                            </label>
+                            <textarea id="purpose" class="form-control" rows="3"
+                                    placeholder="Enter purpose" required></textarea>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Submit Request
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-counterclockwise"></i> Clear Form
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Borrowing Records -->
+    <section id="records" class="mb-5">
+        <h4 class="mb-2">
+            <i class="bi bi-journal-text section-icon"></i>Borrowing Records
+        </h4>
+        <p class="text-secondary">View sample borrowing transactions.</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Borrower ID</th>
+                                <th>Borrower Name</th>
+                                <th>Item</th>
+                                <th>Borrow Date</th>
+                                <th>Expected Return</th>
+                                <th>Actual Return</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2024-00001</td>
+                                <td>Kinjay Dela Cruz</td>
+                                <td>Epson Projector EB-X06</td>
+                                <td>Oct 1, 2026</td>
+                                <td>Oct 3, 2026</td>
+                                <td>Oct 3, 2026</td>
+                                <td><span class="badge-status returned"><i class="bi bi-check-circle"></i> Returned</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2024-00002</td>
+                                <td>Sarah Gomez</td>
+                                <td>Wireless Microphone Set</td>
+                                <td>Oct 10, 2026</td>
+                                <td>Oct 12, 2026</td>
+                                <td>—</td>
+                                <td><span class="badge-status borrowed"><i class="bi bi-clock"></i> Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>FAC-2021-01</td>
+                                <td>Prof. Alan Turing</td>
+                                <td>Dell Monitor 24 inch</td>
+                                <td>Oct 11, 2026</td>
+                                <td>Oct 13, 2026</td>
+                                <td>—</td>
+                                <td><span class="badge-status borrowed"><i class="bi bi-clock"></i> Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Maintenance Records -->
+    <section id="maintenance" class="mb-4">
+        <h4 class="mb-2">
+            <i class="bi bi-tools section-icon"></i>Maintenance Records
+        </h4>
+        <p class="text-secondary">View equipment repairs and expenses.</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Property No.</th>
+                                <th>Equipment</th>
+                                <th>Date</th>
+                                <th>Issue</th>
+                                <th>Action Taken</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>PROP-OFF-005</td>
+                                <td><i class="bi bi-printer me-1"></i>HP LaserJet Printer</td>
+                                <td>Oct 5, 2026</td>
+                                <td>Paper jam and light print output</td>
+                                <td>Replaced toner and cleaned rollers</td>
+                                <td>₱1,500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="text-center py-3">
+    <div><i class="bi bi-box-seam"></i> <strong>School Borrowing System</strong></div>
+    <small>Equipment Inventory and Borrowing Management</small>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
